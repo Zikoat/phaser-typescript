@@ -10,7 +10,7 @@ function preload() {
 	game.load.spritesheet("dude", "assets/dude.png", 32, 48);
 }
 
-var platforms;
+var platforms: Phaser.Group;
 
 function create() {
 
@@ -20,7 +20,7 @@ function create() {
 
 	
 
-	game.add.sprite(0, 0, "star");
+	var point: Phaser.Sprite = game.add.sprite(0, 0, "star");
 
 	platforms = game.add.group();
 
@@ -42,5 +42,6 @@ function create() {
 }
 
 function update() {
+	
 
 }
