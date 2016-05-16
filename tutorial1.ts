@@ -3,6 +3,7 @@
 console.log("tutorial 1");
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "", { preload: preload, create: create, update: update });
 
+
 function preload() {
 	game.load.image("sky", "assets/sky.png");
 	game.load.image('platform', 'assets/platform.png');
@@ -18,6 +19,7 @@ function create() {
 
 	game.add.sprite(0, 0, "sky");
 
+
 	
 
 	var point: Phaser.Sprite = game.add.sprite(0, 0, "star");
@@ -26,14 +28,16 @@ function create() {
 
 	platforms.enableBody = true;
 
-	var ground = platforms.create(0, game.world.height - 64, "platform");
+	var ground: Phaser.Sprite = platforms.create(0, game.world.height - 64, "platform");
 
 	ground.scale.setTo(2, 2);
 
 	ground.body.immovable = true;
-	var ledge = platforms.create(400, 400, 'platform');
+	var ledge: Phaser.Sprite = platforms.create(400, 400, 'platform');
 
+    ledge.physicsEnabled = true;
     ledge.body.immovable = true;
+
 
     ledge = platforms.create(-150, 250, 'platform');
 
@@ -43,5 +47,4 @@ function create() {
 
 function update() {
 	
-
 }

@@ -1,16 +1,32 @@
 ///<reference path='./node_modules/phaser/typescript/phaser.d.ts' />
-var Student = (function () {
-    function Student(firstName, middleInitial, lastName) {
-        this.firstName = firstName;
-        this.middleInitial = middleInitial;
-        this.lastName = lastName;
-        this.fullName = firstName + " " + middleInitial + " " + lastName;
+class MyGame {
+    constructor() {
+        var game = new Phaser.Game(800, 600, Phaser.AUTO, "", {
+            preload: this.preload,
+            create: this.create,
+            update: this.update,
+            render: this.render
+        });
     }
-    return Student;
-}());
-function greeter(person) {
-    return "Hello, " + person.firstName + " " + person.lastName;
+    preload() {
+        this.game.load.image("sky", "assets/sky.png");
+        this.game.load.image('platform', 'assets/platform.png');
+        this.game.load.image('star', 'assets/star.png');
+        this.game.load.spritesheet("dude", "assets/dude.png", 32, 48);
+    }
+    create() {
+        var style = { font: "65px Arial", fill: "#ff0000", align: "center" };
+        this.textValue = this.game.add.text(400, 0, "0", style);
+        this.updateCount = 0;
+    }
+    update() {
+        this.textValue.text = Phaser.Math.fuzzyFloor(this.updateCount++ / 60).toString();
+        this.textValue.y = Phaser.Math.clamp(this.updateCount, 0, 600 - 65);
+    }
+    render() {
+        this.game.debug.text("ey boss", 0, 80);
+    }
 }
-var user = new Student("Zikoort", "v", "goot");
-console.log(user.fullName);
-//# sourceMappingURL=app.js.map
+window.onload = () => {
+    var game = new MyGame();
+};
